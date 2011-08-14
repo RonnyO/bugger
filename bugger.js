@@ -16,11 +16,23 @@ var bugger = (function(){
 				}
 			}
 		},
-		// Defined undefined
+		// Define undefined
 		function(){
 			undefined = {};
 		},
-		function(){console.log('3')}, function(){console.log('4')}, function(){console.log('5')}, function(){console.log('6')}, function(){console.log('7')}
+		// Flip! from http://userscripts.org/scripts/show/100110
+		function(){
+			var addStyle = function(css) {
+				var head = document.getElementsByTagName('head')[0], style = document.createElement('style');
+				if (!head) return;
+				style.type = 'text/css';
+				style.textContent = css;
+				head.appendChild(style);
+			}
+			var css = "body{-moz-transform: scaleX(-1);-o-transform: scaleX(-1);-webkit-transform: scaleX(-1);transform: scaleX(-1)}img{-moz-transform: scaleY(-1);-o-transform: scaleY(-1);-webkit-transform: scaleY(-1);transform: scaleY(-1)}";
+			addStyle(css);
+		},
+		function(){console.log('4')}, function(){console.log('5')}, function(){console.log('6')}, function(){console.log('7')}
 	];
 	var active = [];
 	var chooseBugs = function(){
