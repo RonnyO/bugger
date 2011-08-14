@@ -1,6 +1,22 @@
 var bugger = (function(){
 	var bag = [
-		function(){console.log('0')}, function(){console.log('1')}, function(){console.log('2')}, function(){console.log('3')}, function(){console.log('4')}, function(){console.log('5')}, function(){console.log('6')}, function(){console.log('7')}
+		/* IE6ify, from http://ie6ify.com/ */
+		function(){
+			var ie6ify = function(){var i=0,r=function(n){return Math.floor(Math.random()*n)},f=document.getElementsByTagName('body')[0].getElementsByTagName('*'),o=function(e){return typeof(e.style)=='object'&&e.tagName!='SCRIPT'},s=function(){while(!o(e=f[r(f.length)])){}return e.style};while(i++<5){s().display=r(2)?'block':'inline';s().position=r(2)?'absolute':'relative';s().margin=r(2)?'0':'1em';s().padding=r(2)?'0':'1em';s().width=r(2)?'':'auto';}};
+			//bugger.attach(ie6ify, clicks);
+		},
+		/* Null Methods */
+		function(){
+			var methods = [console.log, alert, document.getElementById, $],
+				muhaha = {};
+			for(var i = 0, l = methods.length; i < l; i++){
+				if(typeof methods[i] === 'function') {
+					_original = methods[i];
+					methods[i] = ( Math.random() > 0.5 ) ? Function() : _original;
+				}
+			}
+		},
+		function(){console.log('2')}, function(){console.log('3')}, function(){console.log('4')}, function(){console.log('5')}, function(){console.log('6')}, function(){console.log('7')}
 	];
 	var active = [];
 	var chooseBugs = function(){
@@ -16,13 +32,11 @@ var bugger = (function(){
 			if(active.indexOf(level) > -1){ i-- } else { active.push(level) };
 		}
 			
-		console.log('velocity', velocity, active);
 		Cookie.set('bugger.active', active);
 	};
 	
 	var init = function(){
-		chooseBugs();
-		console.info('active bugs are', active);
+		chooseBugs();		
 		for(var i = 0; i < active.length; i++){
 			if (typeof bag[active[i]] === 'function') bag[active[i]]();
 		}

@@ -16,6 +16,7 @@ crash browser
 remove event listeners
 remove dom elements
 fuck up text direction
+flip!
 
 // coding bugs
 define undefined
