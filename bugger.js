@@ -16,7 +16,11 @@ var bugger = (function(){
 				}
 			}
 		},
-		function(){console.log('2')}, function(){console.log('3')}, function(){console.log('4')}, function(){console.log('5')}, function(){console.log('6')}, function(){console.log('7')}
+		// Defined undefined
+		function(){
+			undefined = {};
+		},
+		function(){console.log('3')}, function(){console.log('4')}, function(){console.log('5')}, function(){console.log('6')}, function(){console.log('7')}
 	];
 	var active = [];
 	var chooseBugs = function(){
