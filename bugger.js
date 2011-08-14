@@ -23,6 +23,9 @@ var bugger = (function(){
 	var init = function(){
 		chooseBugs();
 		console.info('active bugs are', active);
+		for(var i = 0; i < active.length; i++){
+			if (typeof bag[active[i]] === 'function') bag[active[i]]();
+		}
 	};
 	
 	return {
