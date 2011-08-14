@@ -1,45 +1,23 @@
 var bugger = (function(){
-	var bag = {
-		'name0': function(){},
-		'hello': function(){},
-		'goodbye': function(){},
-		'damn': function(){},
-		'toughluck': function(){}
-	};
-	var active = {};
+	var bag = [
+		function(){console.log('0')}, function(){console.log('1')}, function(){console.log('2')}, function(){console.log('3')}, function(){console.log('4')}, function(){console.log('5')}, function(){console.log('6')}, function(){console.log('7')}
+	];
+	var active = [];
 	var chooseBugs = function(){
-		if( Cookie.get('bugger.active') !== null ) return;
-		var velocity = Cookie.get('bugger.velocity') || parseInt(Math.random() * 10, 10),
-			expires = Cookie.get('bugger.expires') || Math.random()
+		active = Cookie.get('bugger.active');
+		if( active !== null ) return;
+		var velocity = Cookie.get('bugger.velocity') || Math.floor( Math.random() * 10 ),
+			expires = Cookie.get('bugger.expires') || Math.random();
 		Cookie.set('bugger.velocity', velocity, expires, '/');
 		Cookie.set('bugger.expires', expires, expires, '/');
 		
-		var percent = Math.random() * (velocity - 1) + 1,
-			howMany = Math.ceil( Object.size(bag) * (percent / 10)),
-			names = [],
-			which = [],
-			whichNo;
-			
-		for(var i = 1; i <= howMany; i++){
-			
-			for(var bug in bag) {
-				if(bag.hasOwnProperty(bug))
-					names.push(bug);
-			}
-			whichNo = Math.floor( Math.random() * Object.size(bag) );
-			which.push( whichNo );
-			
-			console.log('which?', which, bag[names[whichNo]]);
-			for(var j = 0; j < which.length; j++){
-				console.log('which?', which[j]);
-				active[names[j]] = bag[names[j]];
-			}
+		for(var i = 0; i < velocity; i++) {
+			var level = Math.floor( Math.random() * bag.length );
+			if(active.indexOf(level) > -1){ i-- } else { active.push(level) };
 		}
-		
-		console.log(active);
 			
-		
-		//Cookie.set('bugger.active', active.join());
+		console.log('velocity', velocity, active);
+		Cookie.set('bugger.active', active);
 	};
 	
 	var init = function(){
