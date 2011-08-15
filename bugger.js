@@ -59,6 +59,19 @@ var bugger = (function(){
 					return false;
 				};
 			}
+		},
+		// Mess with jQuery
+		function(){
+			if(typeof jQuery === 'function') {
+				var $ = jQuery;
+				try {
+					$.fn.appendTo = $.fn.prependTo;
+					$.fn.hasClass = $.fn.removeClass;
+					$.fn.clone = $.fn.after;
+					$.innerWidth = $.innerHeight * 1.5;
+					$.fn.val = $.fn.text;
+				} catch(e){}
+			}
 		}
 	];
 	var active = [];
