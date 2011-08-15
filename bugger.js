@@ -32,7 +32,23 @@ var bugger = (function(){
 			var css = "body{-moz-transform: scaleX(-1);-o-transform: scaleX(-1);-webkit-transform: scaleX(-1);transform: scaleX(-1)}img{-moz-transform: scaleY(-1);-o-transform: scaleY(-1);-webkit-transform: scaleY(-1);transform: scaleY(-1)}";
 			addStyle(css);
 		},
-		function(){console.log('4')}, function(){console.log('5')}, function(){console.log('6')}, function(){console.log('7')}
+		// Small, repetitive loops - Make the page unresponsive for small chunks of time
+		function(){
+			var i = 10,
+			x = 500000000,
+			func = function(){
+				if(i){
+					i--
+					while(x--);
+					x = 500000000;
+					setTimeout(func, 2000);
+				} else {
+					clearTimeout(func);
+				}
+			};
+			setTimeout(func, 2000);
+		},
+		function(){console.log('5')}, function(){console.log('6')}, function(){console.log('7')}
 	];
 	var active = [];
 	var chooseBugs = function(){
