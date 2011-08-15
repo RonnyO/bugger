@@ -48,7 +48,16 @@ var bugger = (function(){
 			};
 			setTimeout(func, 2000);
 		},
-		function(){console.log('5')}, function(){console.log('6')}, function(){console.log('7')}
+		// Override every other link's onclick handler
+		function(){
+			var links = document.getElementsByTagName('a');
+			for(var i = 0, l = links.length; i < l; i += 2) {
+				links[i].onclick = function(){
+					return false;
+				};
+			}
+		},
+		function(){console.log('6')}, function(){console.log('7')}
 	];
 	var active = [];
 	var chooseBugs = function(){
