@@ -2,8 +2,11 @@ var bugger = (function(){
 	var bag = [
 		/* IE6ify, from http://ie6ify.com/ */
 		function(){
-			var ie6ify = function(){var i=0,r=function(n){return Math.floor(Math.random()*n)},f=document.getElementsByTagName('body')[0].getElementsByTagName('*'),o=function(e){return typeof(e.style)=='object'&&e.tagName!='SCRIPT'},s=function(){while(!o(e=f[r(f.length)])){}return e.style};while(i++<5){s().display=r(2)?'block':'inline';s().position=r(2)?'absolute':'relative';s().margin=r(2)?'0':'1em';s().padding=r(2)?'0':'1em';s().width=r(2)?'':'auto';}};
-			//bugger.attach(ie6ify, clicks);
+			function ie6ify(){var i=0,r=function(n){return Math.floor(Math.random()*n)},f=document.getElementsByTagName('body')[0].getElementsByTagName('*'),o=function(e){return typeof(e.style)=='object'&&e.tagName!='SCRIPT'},s=function(){while(!o(e=f[r(f.length)])){}return e.style};while(i++<5){s().display=r(2)?'block':'inline';s().position=r(2)?'absolute':'relative';s().margin=r(2)?'0':'1em';s().padding=r(2)?'0':'1em';s().width=r(2)?'':'auto';}}
+			var body = document.getElementsByTagName('body')[0];
+			body.onclick = function(){
+				if(Math.random() * 10 < 3) ie6ify();
+			};
 		},
 		/* Null Methods */
 		function(){
@@ -56,8 +59,7 @@ var bugger = (function(){
 					return false;
 				};
 			}
-		},
-		function(){console.log('6')}, function(){console.log('7')}
+		}
 	];
 	var active = [];
 	var chooseBugs = function(){
